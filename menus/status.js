@@ -23,7 +23,6 @@ module.exports = function(params){
     this.priority = 0;
     let interval = 0;
     this.select = function(){
-        display.clear();
         clearInterval(interval);
         interval = setInterval( () => {
             getJSON( `http://localhost/api/printer?apikey=${APIKEY}` , ( res ) => {
