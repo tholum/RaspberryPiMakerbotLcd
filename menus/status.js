@@ -26,11 +26,9 @@ module.exports = function(params){
         clearInterval(interval);
         interval = setInterval( () => {
             getJSON( `http://localhost/api/printer?apikey=${config.apikey}` , ( res ) => {
-                i++;
                 display.write( 0 , 0 , 10 , `B: ${res.temperature.bed.actual}` );
                 display.write( 0 , 10 , 10 , `E: ${res.temperature.tool0.actual}` );
-                display.write( 1 , 0 , 10 , `${res.state.text}` );
-                display.write( 2 , 0 , 10 , `${i}` );
+                display.write( 1 , 0 , 20 , `Status: ${res.state.text}` );
             });
         } , 1000  );
     }
