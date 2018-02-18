@@ -57,7 +57,7 @@ module.exports = function( params ){
     }
     let eval = ( str ) => {
         if(  atMenu === true && menus[currentPosition].hasOwnProperty("eval") && typeof menus[currentPosition].eval === "function" ){
-            menus[dmIndex].eval( str );
+            menus[currentPosition].eval( str );
         }
     }
     readMenus();
