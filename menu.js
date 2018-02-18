@@ -9,7 +9,7 @@ module.exports = function( params ){
         
     }
     let readMenus = () => {
-        fs.readdir(path, function(err, items) {
+        fs.readdir("./menus", function(err, items) {
             console.log(items);
         });
     }
