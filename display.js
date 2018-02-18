@@ -10,8 +10,8 @@ module.exports = function( params ){
 					cols: 20
 		}
     );
+    lcd.clear();
     this.write = function( col , row , len , str ){
-        lcd.clear();
         str = str.substr( 0 , len );
         while( str.length < len ){
             str += " ";

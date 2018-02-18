@@ -75,15 +75,6 @@ Expander.prototype.portWrite = function(value) {
 };
 
 
-/*customWrite = ( a , b ) => {
-	console.log( this.register );	
-        console.log({ a, b});
-var customWrite = ( a , b ) => {
-	console.log({ a, b});
-}
-}*/
-
-
 // const-caps throughout serve to indicate the
 // "const-ness" of the binding to the reader
 // and nothing more.
@@ -175,7 +166,6 @@ var Controllers = {
     },
     initialize: {
       value: function(opts) {
-	console.log("Init");
 
 
         // LCD: 0x3E
@@ -781,7 +771,6 @@ Controllers.MJKDZ = Object.assign({}, Controllers.PCF8574, {
  */
 
 function LCD(opts) {
-  console.log( opts );
   register = opts.register;
   if (!(this instanceof LCD)) {
     return new LCD(opts);
