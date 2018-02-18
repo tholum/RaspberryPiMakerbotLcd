@@ -56,7 +56,7 @@ module.exports = function( params ){
         });
     }
     let eval = ( str ) => {
-        if(  atMenu === true && menus[currentPosition].hasOwnProperty("eval") && typeof menus[currentPosition].eval === "function" ){
+        if(  atMenu === false && menus[currentPosition].hasOwnProperty("eval") && typeof menus[currentPosition].eval === "function" ){
             menus[currentPosition].eval( str );
         }
     }
