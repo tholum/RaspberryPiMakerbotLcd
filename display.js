@@ -11,7 +11,9 @@ module.exports = function( params ){
 		}
     );
     lcd.clear();
-    this.clear = lcd.clear;
+    this.clear = function(){
+        lcd.clear();
+    };
     this.write = function( col , row , len , str ){
         str = str.substr( 0 , len );
         while( str.length < len ){
