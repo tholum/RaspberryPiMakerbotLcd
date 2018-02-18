@@ -52,6 +52,11 @@ module.exports = function( params ){
             drawMenu();
         });
     }
+    let eval = ( str ) => {
+        if(  atMenu === true && displayMenus[dmIndex].hasOwnProperty("eval") && typeof displayMenus[dmIndex].eval === "function" ){
+            displayMenus[dmIndex].eval( str );
+        }
+    }
     readMenus();
 
     let selectMenu = () => {
@@ -60,10 +65,10 @@ module.exports = function( params ){
         menus[currentPosition].select();
     }
     centerButton.on("down" , () => {
-        console.log( atMenu );
         if( atMenu === true ){
             selectMenu();
-        }
+        } 
+        eval("center");
     });
     let unselectMenu = () => {
         atMenu = true;
@@ -71,10 +76,10 @@ module.exports = function( params ){
         drawMenu();
     }
     leftArrow.on("down" , () => {
-        console.log( atMenu );
         if( atMenu === false ){
             unselectMenu();
         }
+        eval("left");
     });
 
     downArrow.on("down" , () => {
@@ -82,12 +87,17 @@ module.exports = function( params ){
             currentPosition++;
             drawMenu();
         }
+        eval("down");
     });
     upArrow.on("down" , () => {
         if( atMenu === true && currentPosition !== 0 ){
             currentPosition--;
             drawMenu();
         }
+        eval("up");
+    });
+    rightArrow.on("right" , () =>{
+        eval("right");
     });
     
 }

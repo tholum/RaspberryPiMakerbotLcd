@@ -24,13 +24,15 @@ module.exports = function(params){
     let interval = 0;
     this.select = function(){
         clearInterval(interval);
-        interval = setInterval( () => {
+        let updateStatus = () => {
             getJSON( `http://localhost/api/printer?apikey=${config.apikey}` , ( res ) => {
                 display.write( 0 , 0 , 10 , `B: ${res.temperature.bed.actual}` );
                 display.write( 0 , 10 , 10 , `E: ${res.temperature.tool0.actual}` );
                 display.write( 1 , 0 , 20 , `Status: ${res.state.text}` );
             });
-        } , 1000  );
+        };
+        updateStatus();
+        interval = setInterval( updateStatus  , 1000  );
     }
     this.unselect = function(){
         clearInterval(interval);
