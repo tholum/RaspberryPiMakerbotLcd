@@ -4,9 +4,21 @@ module.exports = function( params ){
     let display = params.display;
     let rightArrow = new five.Button( { pin : "P1-35" , isPullup : true } );
     let menus = [];
+    let currentPosition = 0;
     
     let drawMenu = () => {
         console.log( menus );
+        let start = 0;
+        let end = 4;
+        if( currentPosition > 4 ){
+            start = currentPosition - 4;
+            end = currentPosition;
+        }
+        let displayMenus = menus.slice( start , end );
+        for( let dmIndex in displayMenus ){
+            let selected = menus.indexOf( displayMenus["dmIndex"]) === currentPosition;
+            display.write( dmIndex , 0 , 10 , `${selected ? ' ' : '*'} ${displayMenus[dmIndex].displayName}` );
+        }
     }
     let readMenus = () => {
         fs.readdir("./menus", function(err, items) {
