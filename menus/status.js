@@ -25,7 +25,7 @@ module.exports = function(params){
     this.select = function(){
         clearInterval(interval);
         interval = setInterval( () => {
-            getJSON( `http://localhost/api/printer?apikey=${APIKEY}` , ( res ) => {
+            getJSON( `http://localhost/api/printer?apikey=${config.apikey}` , ( res ) => {
                 i++;
                 display.write( 0 , 0 , 10 , `B: ${res.temperature.bed.actual}` );
                 display.write( 0 , 10 , 10 , `E: ${res.temperature.tool0.actual}` );
