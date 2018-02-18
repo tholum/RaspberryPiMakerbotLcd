@@ -18,6 +18,7 @@ module.exports = function( params ){
         for( let dmIndex in displayMenus ){
             let selected = menus.indexOf( displayMenus["dmIndex"]) === currentPosition;
             display.write( dmIndex , 0 , 10 , `${selected ? ' ' : '*'} ${displayMenus[dmIndex].displayName}` );
+            console.log( `${selected ? ' ' : '*'} ${displayMenus[dmIndex].displayName}`);
         }
     }
     let readMenus = () => {
