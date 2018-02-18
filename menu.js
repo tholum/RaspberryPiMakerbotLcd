@@ -14,7 +14,7 @@ module.exports = function( params ){
                 return /\.js$/.test( item );
             }).map(
                 (item) => {
-                    item.slice(0 , -3 );
+                    return item.slice(0 , -3 );
                 } 
             );
             console.log(menuItems);
