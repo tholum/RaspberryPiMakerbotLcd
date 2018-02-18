@@ -10,7 +10,14 @@ module.exports = function( params ){
     }
     let readMenus = () => {
         fs.readdir("./menus", function(err, items) {
-            console.log(items);
+            let menuItems = items.filter( ( item ) => {
+                return /\.js$/.test( item );
+            }).map(
+                (item) => {
+                    item.slice(0 , -3 );
+                } 
+            );
+            console.log(menuItems);
         });
     }
     readMenus();
