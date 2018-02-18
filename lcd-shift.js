@@ -183,7 +183,7 @@ var Controllers = {
         this.rows = opts.rows || 2;
         this.cols = opts.cols || 16;
         this.dots = opts.dots || "5x8";
-	this.register = opts.register || false;
+	      //this.register = opts.register || false;
 
         var display = this.REGISTER.DISPLAY | this.REGISTER.DISPLAYON | this.REGISTER.CURSOROFF | this.REGISTER.BLINKOFF;
 
