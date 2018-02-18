@@ -1,11 +1,10 @@
 const http = require("http");
+const config = require("./config");
 
 let ledPin  = "P1-7";
 
-let clock  = "P1-11";
-let data = "P1-13";
-let latch = "P1-15";
-const APIKEY = "994084602B3541E7A658BED294299B60";
+
+const APIKEY = config.apikey;
 
 
 let getJSON = (url , cb ) => {
@@ -27,6 +26,7 @@ let getJSON = (url , cb ) => {
 var five = require("johnny-five");
 five.LcdShift = require("./lcd-shift");
 const Display = require("./display");
+const Menu = require("./menu");
 const Raspi = require("raspi-io");
 const board = new five.Board({
   io: new Raspi()
@@ -35,14 +35,13 @@ const board = new five.Board({
 board.on("ready", function() {
 	
   var register = new five.ShiftRegister({
-    pins: {
-      data,
-      clock,
-      latch
-    }
-  });
-	const led = new five.Led(ledPin);
+    pins: config.displayRegisterPins
+	});
+	
+	const led = new five.Led(config.ledPin);
 	const display = new Display( { five , register });
+	const menu = new Menu( { five , display , led });
+
 	led.blink();
 	let i = 0;
 	setInterval( () => {
