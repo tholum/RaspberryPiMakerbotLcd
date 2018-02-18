@@ -49,6 +49,9 @@ module.exports = function( params ){
                 let tmp = require(`./menus/${menu}`);
                 menus.push( new tmp( { five , display } ))
             }
+            menus = menus.sort( ( a , b ) => {
+                return b.priority - a.priority;
+            });
             drawMenu();
         });
     }
