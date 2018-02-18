@@ -31,9 +31,9 @@ module.exports = function( params ){
         }
         let displayMenus = menus.slice( start , end );
         for( let dmIndex in displayMenus ){
-            let selected = menus.indexOf( displayMenus["dmIndex"]) === currentPosition;
+            let icon = menus.indexOf( displayMenus["dmIndex"]) === currentPosition ? '*' : ' ';
             display.write( dmIndex , 0 , 10 , `${selected ? ' ' : '*'} ${displayMenus[dmIndex].displayName}` );
-            console.log( `${selected ? ' ' : '*'} ${displayMenus[dmIndex].displayName}`);
+            console.log( `${icon} ${displayMenus[dmIndex].displayName}`);
         }
     }
     let readMenus = () => {
