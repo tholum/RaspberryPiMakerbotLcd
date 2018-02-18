@@ -54,11 +54,27 @@ board.on("ready", function() {
 			display.write( 2 , 0 , 10 , `${i}` );
 		});
 	} , 1000  );
-	let btns = {};
-	for( BTN of ["P1-36" , "P1-37" , "P1-38" , "P1-40" , "P1-35"] ){
+	let b35 = new five.Button( { pin : "P1-35" , isPullup : true } );
+	b35.on("down" , () => { console.log("P1-35")});
+	
+	let b36 = new five.Button( { pin : "P1-36" , isPullup : true } );
+	b36.on("down" , () => { console.log("P1-36")});
+
+	let b37 = new five.Button( { pin : "P1-37" , isPullup : true } );
+	b37.on("down" , () => { console.log("P1-37")});
+
+	let b38 = new five.Button( { pin : "P1-38" , isPullup : true } );
+	b38.on("down" , () => { console.log("P1-38")});
+
+	let b40 = new five.Button( { pin : "P1-40" , isPullup : true } );
+	b40.on("down" , () => { console.log("P1-40")});
+
+	
+
+	/*for( BTN of ["P1-36" , "P1-37" , "P1-38" , "P1-40" , "P1-35"] ){
 		btns[BTN] = new five.Button( { pin : BTN , isPullup : true } );
 	       for( CMD of [ "up" , "down" , "hold" ] ){
 	       	   btns[BTN].on( CMD , () => { console.log( `${BTN} did ${CMD}`); } );
 	       }	
-	}
+	}*/
 });
