@@ -49,11 +49,12 @@ board.on("ready", function() {
 		    cols: 20
 	}
   );
-   lcd.clear().print( `OctoPi Testing`).cursor( 1 , 0 ).print("Another Test");
+   lcd.clear();
    setInterval( () => {
    getJSON( `http://localhost/api/printer?apikey=${APIKEY}` , ( res ) => {
-	console.log( res );
-	lcd.clear().print(`B: ${res.temperature.bed.actual} E: ${res.temperature.tool0.actual}`).cursor( 1 , 0 ).print(`${res.state.text}`);
+	lcd.cursor( 0 , 0 ).print(`B: ${res.temperature.bed.actual}`)
+	.cursor( 0 , 10 ).print(`E: ${res.temperature.tool0.actual}`)
+        .cursor( 1 , 0 ).print( `${res.state.text}`);
    } );
    } , 1000  );
 });
