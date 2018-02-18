@@ -60,6 +60,7 @@ module.exports = function( params ){
         menus[currentPosition].select();
     }
     centerButton.on("down" , () => {
+        console.log( atMenu );
         if( atMenu === true ){
             selectMenu();
         }
@@ -69,6 +70,7 @@ module.exports = function( params ){
         menus[currentPosition].unselect();
     }
     leftArrow.on("down" , () => {
+        console.log( atMenu );
         if( atMenu === false ){
             unselectMenu();
         }
