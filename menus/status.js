@@ -16,7 +16,7 @@ let getJSON = (url , cb ) => {
 	});
 }
 
-module.exports = function(parmas){
+module.exports = function(params){
     let five = params.five;
     let display = params.display;
     this.displayName = "Status";
