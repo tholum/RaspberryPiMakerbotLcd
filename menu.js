@@ -57,7 +57,10 @@ module.exports = function( params ){
     }
     let eval = ( str ) => {
         if(  atMenu === false && menus[currentPosition].hasOwnProperty("eval") && typeof menus[currentPosition].eval === "function" ){
-            menus[currentPosition].eval( str );
+            //Set new thread, so the select option does not submit to sub item
+            setTimeout( () => {
+                menus[currentPosition].eval( str );
+            });
         }
     }
     readMenus();
