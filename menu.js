@@ -68,6 +68,7 @@ module.exports = function( params ){
     let unselectMenu = () => {
         atMenu = true;
         menus[currentPosition].unselect();
+        drawMenu();
     }
     leftArrow.on("down" , () => {
         console.log( atMenu );
