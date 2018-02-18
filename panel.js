@@ -27,7 +27,7 @@ var ctof = ( c ) => {
 	return (c * 9/5) + 32;
 }
 var five = require("johnny-five");
-five.ShiftRegister = require("./lcd-shift");
+five.LcdShift = require("./lcd-shift");
 var Raspi = require("raspi-io");
 var board = new five.Board({
   io: new Raspi()
