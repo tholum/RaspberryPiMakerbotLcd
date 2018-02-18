@@ -54,7 +54,7 @@ board.on("ready", function() {
    lcd.clear();
    setInterval( () => {
    getJSON( `http://localhost/api/printer?apikey=${APIKEY}` , ( res ) => {
-	lcd.cursor( 0 , 0 ).print(`B: ${res.temperature.bed.actual}`)
+	lcd.cursor( 0 , 0 ).print(`TEST B: ${res.temperature.bed.actual}`)
 	.cursor( 0 , 10 ).print(`E: ${res.temperature.tool0.actual}`)
         .cursor( 1 , 0 ).print( `${res.state.text}`);
    } );
