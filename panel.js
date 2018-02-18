@@ -54,20 +54,20 @@ board.on("ready", function() {
 			display.write( 2 , 0 , 10 , `${i}` );
 		});
 	} , 1000  );
-	let b35 = new five.Button( { pin : "P1-35" , isPullup : true } );
-	b35.on("down" , () => { console.log("P1-35")});
-	
-	let b36 = new five.Button( { pin : "P1-36" , isPullup : true } );
-	b36.on("down" , () => { console.log("P1-36")});
+	let rightArrow = new five.Button( { pin : "P1-35" , isPullup : true } );
+	rightArrow.on("down" , () => { console.log("rightArrow P1-35")});
 
-	let b37 = new five.Button( { pin : "P1-37" , isPullup : true } );
-	b37.on("down" , () => { console.log("P1-37")});
+	let downArrow = new five.Button( { pin : "P1-36" , isPullup : true } );
+	downArrow.on("down" , () => { console.log("downArrow P1-36")});
 
-	let b38 = new five.Button( { pin : "P1-38" , isPullup : true } );
-	b38.on("down" , () => { console.log("P1-38")});
+	let leftArrow = new five.Button( { pin : "P1-37" , isPullup : true } );
+	leftArrow.on("down" , () => { console.log("leftArrow P1-37")});
 
-	let b40 = new five.Button( { pin : "P1-40" , isPullup : true } );
-	b40.on("down" , () => { console.log("P1-40")});
+	let upArrow = new five.Button( { pin : "P1-38" , isPullup : true } );
+	upArrow.on("down" , () => { console.log("upArrow P1-38")});
+
+	let centerButton = new five.Button( { pin : "P1-40" , isPullup : true } );
+	centerButton.on("down" , () => { console.log("centerButton P1-40")});
 
 	
 
