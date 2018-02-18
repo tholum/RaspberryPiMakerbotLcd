@@ -54,6 +54,11 @@ board.on("ready", function() {
 			display.write( 2 , 0 , 10 , `${i}` );
 		});
 	} , 1000  );
-  
-   
+	let btns = {};
+	for( BTN of ["P1-36" , "P1-37" , "P1-38" , "P1-40" , "P1-35"] ){
+		btns[BTN] = new five.Button( { pin : BTN , isPullup : true } );
+	       for( CMD of [ "up" , "down" , "hold" ] ){
+	       	   btns[BTN].on( CMD , () => { console.log( `${BTN} did ${CMD}`); } );
+	       }	
+	}
 });
