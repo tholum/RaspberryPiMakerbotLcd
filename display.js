@@ -1,8 +1,7 @@
-const http = require("http");
 
 module.exports = function( params ){
     const five = params.five;
-    var lcd = new five.LcdShift(
+    const lcd = new five.LcdShift(
 		{
 			register,
 			pins : [ 1 , 3 , 4 , 5 ,6 , 7],
