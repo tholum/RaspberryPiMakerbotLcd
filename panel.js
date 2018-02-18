@@ -1,4 +1,5 @@
 const http = require("http");
+
 let ledPin  = "P1-7";
 
 let clock  = "P1-11";
@@ -26,6 +27,7 @@ var ctof = ( c ) => {
 	return (c * 9/5) + 32;
 }
 var five = require("johnny-five");
+five.ShiftRegister = require("./lcd-shift");
 var Raspi = require("raspi-io");
 var board = new five.Board({
   io: new Raspi()
