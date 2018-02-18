@@ -20,7 +20,7 @@ module.exports = function( params ){
 
     let menus = [];
     let currentPosition = 0;
-    let atMenu = true;
+    var atMenu = true;
    
     let drawMenu = () => {
         let start = 0;
@@ -32,8 +32,7 @@ module.exports = function( params ){
         let displayMenus = menus.slice( start , end );
         for( let dmIndex in displayMenus ){
             let icon = menus.indexOf( displayMenus[dmIndex]) === currentPosition ? '*' : ' ';
-            display.write( dmIndex , 0 , 10 , `${icon} ${displayMenus[dmIndex].displayName}` );
-            console.log( `${icon} ${displayMenus[dmIndex].displayName}`);
+            display.write( dmIndex , 0 , 20 , `${icon} ${displayMenus[dmIndex].displayName}` );
         }
     }
     let readMenus = () => {
