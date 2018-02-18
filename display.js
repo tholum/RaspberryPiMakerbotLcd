@@ -1,6 +1,7 @@
 
 module.exports = function( params ){
     const five = params.five;
+    const register = params.register;
     const lcd = new five.LcdShift(
 		{
 			register,

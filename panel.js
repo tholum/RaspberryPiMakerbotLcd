@@ -34,9 +34,15 @@ const board = new five.Board({
 
 board.on("ready", function() {
 	
+  var register = new five.ShiftRegister({
+    pins: {
+      data,
+      clock,
+      latch
+    }
+  });
 	const led = new five.Led(ledPin);
-	const display = new Display( { five });
-	display.write( col , row , len , str );
+	const display = new Display( { five , register });
 	led.blink();
 	let i = 0;
 	setInterval( () => {
@@ -46,14 +52,8 @@ board.on("ready", function() {
 			display.write( 0 , 10 , 10 , `E: ${res.temperature.tool0.actual}` );
 			display.write( 1 , 0 , 10 , `${res.state.text}` );
 			display.write( 2 , 0 , 10 , `${i}` );
-		} , 1000  );
-  var register = new five.ShiftRegister({
-    pins: {
-      data,
-      clock,
-      latch
-    }
-  });
+		});
+	} , 1000  );
   
    
 });
