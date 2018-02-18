@@ -6,10 +6,11 @@ module.exports = function( params ){
     let menus = [];
     
     let drawMenu = () => {
-        
+        console.log( menus );
     }
     let readMenus = () => {
         fs.readdir("./menus", function(err, items) {
+            menus = [];
             let menuItems = items.filter( ( item ) => {
                 return /\.js$/.test( item );
             }).map(
@@ -17,7 +18,11 @@ module.exports = function( params ){
                     return item.slice(0 , -3 );
                 } 
             );
-            console.log(menuItems);
+            for( menu of menuItems ){
+                let tmp = require(`./menus/${menu}`);
+                menus.push( new tmp( { five , display } ))
+            }
+            drawMenu();
         });
     }
     readMenus();
