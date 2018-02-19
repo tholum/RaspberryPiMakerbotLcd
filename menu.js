@@ -93,7 +93,6 @@ module.exports = function( params ){
             this.unselectMenu();
         }
     });
-    console.log(buttons);
     buttons.centerButton.on("down" , () => {
         this.eval("center");
     });
