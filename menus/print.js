@@ -21,11 +21,13 @@ module.exports = function(params){
     let five = params.five;
     let display = params.display;
     let menu = params.menu;
+    let buttons = params.buttons;
 
     this.displayName = "Print";
     this.priority = 2;
     this.enabled = false;
     const displayList = new DisplayList({
+        buttons,
         display,
         list : [],
         renderLine : (item) => {
