@@ -39,8 +39,9 @@ module.exports = function(params){
                 if( res.hasOwnProperty("progress") && res.progress.hasOwnProperty("completion") ){
                     progress = `${Math.round( res.progress.completion )}%`;
                 }
-                display.write( 2 , 0 , 10, `P: ${progress}` );
-                display.write( 3 , 0 , 5, `${filename}` );
+                display.write( 2 , 0 , 20, `${filename}` );
+                display.write( 3 , 0 , 10, `P: ${progress}` );
+                
             });
         };
         updateStatus();

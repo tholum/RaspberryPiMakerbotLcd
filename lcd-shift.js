@@ -6,13 +6,16 @@ var RGB = require("./node_modules/johnny-five/lib/led/rgb");
 var priv = new Map();
 var register = false;
 var registerValue = 0;
-var	customWrite = ( a , b ) => {
+var	customWrite = ( a , b , send = true ) => {
 		if( b === 0 ) {
 			registerValue &= ~( 1 << a );
 		} else {
 			registerValue |= ( 1 << a );
-		}		
-		 register.send(registerValue );
+    }		
+    if( send ) {
+      register.send(registerValue );
+    }
+		 
 	}
 
 /**
@@ -660,7 +663,7 @@ var Controllers = {
           this.io.pinMode(pin, 1);
         }, this); */
 
-        customWrite(this.pins.rs, this.io.LOW);
+        customWrite(this.pins.rs, this.io.LOW , false );
         customWrite(this.pins.en, this.io.LOW);
 
         if (opts.backlight) {
@@ -834,7 +837,9 @@ LCD.prototype.send = function(value) {
   for (; mask > 0; mask = mask >> 1) {
     customWrite(
       this.pins.data[pin],
-      this.io[value & mask ? "HIGH" : "LOW"]
+      this.io[value & mask ? "HIGH" : "LOW"],
+      false
+
     );
     pin++;
   }
@@ -844,7 +849,7 @@ LCD.prototype.send = function(value) {
   // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
   // We therefore wait for 1 microsecond here to ensure that fast IO plugins
   // like Pi-IO generate an enable pulse that's wide enough.
-  customWrite(this.pins.en, this.io.LOW);
+  customWrite(this.pins.en, this.io.LOW );
   customWrite(this.pins.en, this.io.HIGH);
   sleepus(1);
   customWrite(this.pins.en, this.io.LOW);
