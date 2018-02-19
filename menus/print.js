@@ -29,7 +29,6 @@ let getJSON = (url , cb ) => {
 }
 
 module.exports = function(params){
-    let five = params.five;
     let display = params.display;
     let menu = params.menu;
     let buttons = params.buttons;

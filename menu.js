@@ -1,14 +1,9 @@
 let fs = require("fs");
 const DisplayList = require("./display-list");
 module.exports = function( params ){
-    let five = params.five;
     let display = params.display;
     let buttons = params.buttons;
     let self = this;
-
-    
-
-    //centerButton.on("down" , () => { console.log("centerButton P1-40")});
 
     let menus = [];
     let currentPosition = 0;
@@ -43,7 +38,7 @@ module.exports = function( params ){
             );
             for( menu of menuItems ){
                 let tmp = require(`./menus/${menu}`);
-                menus.push( new tmp( { five , display , buttons , menu : self } ));
+                menus.push( new tmp( {  display , buttons , menu : self } ));
             }
             menus = menus.sort( ( a , b ) => {
                 return a.priority - b.priority;
@@ -56,16 +51,13 @@ module.exports = function( params ){
         this.onList.push( { cmd , callback });
     }
     this.eval = function( str ){
+        if( currentItem  !== false && typeof currentItem.eval === "function" ){
+            currentItem.eval( str );
+        }
         if( atMenu === true ){
             displayList.eval( str );
         }
-        if( currentItem  !== false && currentItem.hasOwnProperty("eval") && typeof currentItem.eval === "function" ){
-            //Set new thread, so the select option does not submit to sub item
-            setTimeout( () => {
-                currentItem.eval( str );
-            });
-        }
-        let callbacks = this.onList.filter( ( item) => {return item.cmd === str; });
+        let callbacks = this.onList.filter( ( item) => item.cmd === str );
         for( item of callbacks ){
             item.callback();
         }

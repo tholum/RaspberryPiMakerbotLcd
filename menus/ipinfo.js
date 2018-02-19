@@ -1,7 +1,6 @@
 var os = require('os');
 
 module.exports = function(params){
-    let five = params.five;
     let display = params.display;
     this.priority = 1000;
     this.displayName = "IP Info";
