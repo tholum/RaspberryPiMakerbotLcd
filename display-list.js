@@ -54,5 +54,6 @@ module.exports = function( params ){
                 }
             break;
         }
+        this.display();
     }
 }
