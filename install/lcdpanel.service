@@ -1,0 +1,14 @@
+[Unit]
+Description=Simple LCD Panel for OctoPrint
+Documentation=none
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/forever panel.js
+Restart=always
+WorkingDirectory=/lcd
+
+[Install]
+WantedBy=multi-user.target
