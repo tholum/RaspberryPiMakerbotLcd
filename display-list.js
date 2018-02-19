@@ -37,6 +37,9 @@ module.exports = function( params ){
     this.eval = function(cmd){
         console.log( `display list ${cmd}`);
         switch( cmd ){
+            case "center":
+                select( list[selectedItem] );
+            break;
             case "up":
                 if( selectedItem !== 0 ){
                     selectedItem--;
@@ -44,6 +47,7 @@ module.exports = function( params ){
                         displayTop = selectedItem;
                     }
                 }
+                this.display();
             break;
             case "down":
                 if( (selectedItem +1 ) < list.length ){
@@ -52,8 +56,9 @@ module.exports = function( params ){
                         displayTop++;
                     }
                 }
+                this.display();
             break;
         }
-        this.display();
+        
     }
 }
