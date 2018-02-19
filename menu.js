@@ -1,4 +1,5 @@
 let fs = require("fs");
+const DisplayList = require("./display-list");
 module.exports = function( params ){
     let five = params.five;
     let display = params.display;
@@ -30,9 +31,24 @@ module.exports = function( params ){
     let menus = [];
     let currentPosition = 0;
     var atMenu = true;
-   
+    let currentItem = false;
+    let displayList = new DisplayList({
+        display,
+        list : menus,
+        renderLine : ( item ) => {
+            return item.displayName;
+        },
+        select : ( item ) => {
+            atMenu = false;
+            currentItem = item;
+            display.clear();
+            menus[currentPosition].select();
+        }
+    });    
     let drawMenu = () => {
-        let start = 0;
+        displayList.updateList( menus );
+        displayList.display();
+        /*let start = 0;
         let end = 4;
         if( currentPosition > 4 ){
             start = currentPosition - 4;
@@ -42,7 +58,7 @@ module.exports = function( params ){
         for( let dmIndex in displayMenus ){
             let icon = menus.indexOf( displayMenus[dmIndex]) === currentPosition ? '*' : ' ';
             display.write( dmIndex , 0 , 20 , `${icon} ${displayMenus[dmIndex].displayName}` );
-        }
+        } */
     }
     let readMenus = () => {
         fs.readdir("./menus", function(err, items) {
@@ -65,29 +81,25 @@ module.exports = function( params ){
         });
     }
     let eval = ( str ) => {
-        if(  atMenu === false && menus[currentPosition].hasOwnProperty("eval") && typeof menus[currentPosition].eval === "function" ){
+        if( atMenu === true ){
+            displayList.eval( str );
+        }
+        if( currentItem  !== false && currentItem.hasOwnProperty("eval") && typeof currentItem.eval === "function" ){
             //Set new thread, so the select option does not submit to sub item
             setTimeout( () => {
-                menus[currentPosition].eval( str );
+                currentItem.eval( str );
             });
         }
     }
     readMenus();
 
-    let selectMenu = () => {
-        atMenu = false;
-        display.clear();
-        menus[currentPosition].select();
-    }
     centerButton.on("down" , () => {
-        if( atMenu === true ){
-            selectMenu();
-        } 
         eval("center");
     });
     this.unselectMenu = () => {
         atMenu = true;
-        menus[currentPosition].unselect();
+        currentItem.unselect();
+        currentItem = false;
         drawMenu();
     }
     this.return = function(){
@@ -101,17 +113,9 @@ module.exports = function( params ){
     });
 
     downArrow.on("down" , () => {
-        if( atMenu === true && currentPosition < menus.length ){
-            currentPosition++;
-            drawMenu();
-        }
         eval("down");
     });
     upArrow.on("down" , () => {
-        if( atMenu === true && currentPosition !== 0 ){
-            currentPosition--;
-            drawMenu();
-        }
         eval("up");
     });
     rightArrow.on("right" , () =>{

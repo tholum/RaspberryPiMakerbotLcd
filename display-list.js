@@ -2,8 +2,7 @@
 module.exports = function( params ){
     let display = params.display;
     let list = params.list;
-    
-    let buttons = params.buttons;
+
     let renderLine = params.renderLine;
 
     let selectedItem = 0;
@@ -13,14 +12,8 @@ module.exports = function( params ){
         if( typeof params.select === "function" ){
             params.select( item );
         }
-        if( params.hasOwnProperty("keepActive")  ){
-            this.active = params.keepActive;
-        } else {
-            this.active = false;
-        }
     }
     this.display = function(){
-        this.active = true;
         let subItems = list.slice( displayTop , displayTop + 4 );
         let i = 0;
         for( item of subItems ){
@@ -35,7 +28,6 @@ module.exports = function( params ){
         displayTop = 0;
     }
     this.eval = function(cmd){
-        console.log( `display list ${cmd}`);
         switch( cmd ){
             case "center":
                 select( list[selectedItem] );
