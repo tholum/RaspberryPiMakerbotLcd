@@ -32,6 +32,6 @@ board.on("ready", function() {
 	};
 	const led = new five.Led(config.ledPin);
 	const display = new Display( { five , buttons });
-	const menu = new Menu( { five , display , led });
+	const menu = new Menu( { five , display , led , buttons });
 	led.blink();
 });
