@@ -11,6 +11,7 @@ module.exports = function( params ){
 		}
     );
     lcd.clear();
+    lcd.useChar("bigpointerright");
     this.clear = function(){
         lcd.clear();
     };
