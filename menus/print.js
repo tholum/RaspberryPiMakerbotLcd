@@ -1,32 +1,16 @@
 const http = require("http");
+var request = require('request');
 const config = require("../config");
 const DisplayList = require("../display-list");
 let printFile = ( path , object ,cb = () => {} ) => {
-    var post_data = querystring.stringify(object);
-  
-    // An object of options to indicate where to post to
-    var post_options = {
-        host: 'localhost',
-        port: '80',
-        path : `${path}?apikey=${config.apikey}`,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': Buffer.byteLength(post_data)
+
+    request.post(
+        `http://localhost/${path}?apikey=${config.apikey}`,
+        { json: object },
+        function (error, response, body) {
+            console.log( response );
         }
-    };
-    console.log( post_options);
-  
-    // Set up the request
-    var post_req = http.request(post_options, function(res) {
-        res.setEncoding('utf8');
-        let data = "";
-        res.on('data', function (chunk) {
-            data += chunk;
-            console.log('Response: ' + chunk);
-        });
-        res.on("end" , () => { cb( data ); console.log( data ); } );
-    });
+    );
 }
 let getJSON = (url , cb ) => {
 	http.get(url, function(res){
