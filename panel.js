@@ -33,5 +33,10 @@ board.on("ready", function() {
 	const led = new five.Led(config.ledPin);
 	const display = new Display( { five , buttons });
 	const menu = new Menu( { five , display , led , buttons });
+	buttons.centerButton.on("down" , () => { menu.eval("center"); });
+	buttons.leftArrow.on("down" , () => { menu.eval("left");});
+	buttons.downArrow.on("down" , () => { menu.eval("down"); });
+	buttons.upArrow.on("down" , () => { menu.eval("up"); });
+	buttons.rightArrow.on("right" , () =>{ menu.eval("right"); });
 	led.blink();
 });

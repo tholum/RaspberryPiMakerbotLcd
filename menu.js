@@ -93,22 +93,6 @@ module.exports = function( params ){
             this.unselectMenu();
         }
     });
-    buttons.centerButton.on("down" , () => {
-        this.eval("center");
-    });
-    buttons.leftArrow.on("down" , () => {
-        
-        this.eval("left");
-    });
-
-    buttons.downArrow.on("down" , () => {
-        this.eval("down");
-    });
-    buttons.upArrow.on("down" , () => {
-        this.eval("up");
-    });
-    buttons.rightArrow.on("right" , () =>{
-        this.eval("right");
-    });
+    
     
 }
