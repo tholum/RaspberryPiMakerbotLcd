@@ -40,7 +40,7 @@ module.exports = function(params){
 
     })
     this.select = function(){ 
-        this.enabled = true;
+        
         displayList.updateList([
             {"name" : "TEST 1"},
             {"name" : "TEST 2 "},
@@ -49,6 +49,9 @@ module.exports = function(params){
             {"name" : "TEST 5"}
         ]);
         displayList.display();
+        setTimeout( () => {
+            this.enabled = true;
+        });
     }
     this.unselect = function(){
         this.enabled = false;

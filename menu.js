@@ -2,6 +2,7 @@ let fs = require("fs");
 module.exports = function( params ){
     let five = params.five;
     let display = params.display;
+    let menu = this;
 
     let rightArrow = new five.Button( { pin : "P1-35" , isPullup : true } );
     //rightArrow.on("down" , () => { console.log("rightArrow P1-35")});
@@ -55,7 +56,7 @@ module.exports = function( params ){
             );
             for( menu of menuItems ){
                 let tmp = require(`./menus/${menu}`);
-                menus.push( new tmp( { five , display , buttons , menu : this } ));
+                menus.push( new tmp( { five , display , buttons , menu  } ));
             }
             menus = menus.sort( ( a , b ) => {
                 return b.priority - a.priority;
