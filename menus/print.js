@@ -31,25 +31,20 @@ module.exports = function(params){
         display,
         list : [],
         renderLine : (item) => {
-            return item.name;
+            return item.display;
         },
         select : ( item ) => {
             console.log( item );
-            console.log( menu );
             menu.return();
         }
 
     })
     this.select = function(){ 
-        
-        displayList.updateList([
-            {"name" : "TEST 1"},
-            {"name" : "TEST 2 "},
-            {"name" : "TEST 3"},
-            {"name" : "TEST 4 "},
-            {"name" : "TEST 5"}
-        ]);
-        displayList.display();
+        getJSON(`http://localhost/api/files?apikey=${config.apikey}&recursive=true`, ( data ) => {
+            let files = data.files.sort( ( a, b ) => { return a.date - b.date;} );
+            displayList.updateList( files );
+            displayList.display();
+        });
         // Debounce for select
         setTimeout( () => {
             this.enabled = true;
