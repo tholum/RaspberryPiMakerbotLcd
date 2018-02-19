@@ -49,9 +49,10 @@ module.exports = function(params){
             {"name" : "TEST 5"}
         ]);
         displayList.display();
+        // Debounce for select
         setTimeout( () => {
             this.enabled = true;
-        });
+        } , 250 );
     }
     this.unselect = function(){
         this.enabled = false;
