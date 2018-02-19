@@ -1,17 +1,26 @@
 
+const config = require("./config");
+
 module.exports = function( params ){
     const five = params.five;
-    const register = params.register;
-    const lcd = new five.LcdShift(
-		{
-			register,
-			pins : [ 1 , 3 , 4 , 5 ,6 , 7],
-					rows: 4,
-					cols: 20
-		}
-    );
+    let lcd = false;
+    switch( String(config.lcd.mode).toLowerCase() ){
+        case "shiftlcd":
+            const register = new five.ShiftRegister({
+                pins: config.lcd.shiftRegisterPins
+            });
+            lcd = new five.LcdShift(
+                {
+                    register,
+                    pins : config.lcd.pins,
+                    rows: 4,
+                    cols: 20
+                }
+            );
+        break;
+    }
+    
     lcd.clear();
-    lcd.useChar("bigpointerright");
     this.clear = function(){
         lcd.clear();
     };

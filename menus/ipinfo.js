@@ -6,7 +6,7 @@ module.exports = function(params){
     this.priority = 1000;
     this.displayName = "IP Info";
     this.select = function(){
-        display.write(0 , 0 , 10 , "IP Menu :bigpointerright:");
+        display.write(0 , 0 , 10 , "IP Menu ");
         var ifaces = os.networkInterfaces();
         Object.keys(ifaces).forEach(function (ifname) {
             let i = 1;
