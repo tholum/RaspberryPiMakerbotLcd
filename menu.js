@@ -15,7 +15,15 @@ module.exports = function( params ){
 	let upArrow = new five.Button( { pin : "P1-38" , isPullup : true } );
 	//upArrow.on("down" , () => { console.log("upArrow P1-38")});
 
-	let centerButton = new five.Button( { pin : "P1-40" , isPullup : true } );
+    let centerButton = new five.Button( { pin : "P1-40" , isPullup : true } );
+    let buttons = {
+        rightArrow,
+        leftArrow,
+        downArrow,
+        upArrow,
+        centerButton
+    };
+
     //centerButton.on("down" , () => { console.log("centerButton P1-40")});
 
     let menus = [];
@@ -47,7 +55,7 @@ module.exports = function( params ){
             );
             for( menu of menuItems ){
                 let tmp = require(`./menus/${menu}`);
-                menus.push( new tmp( { five , display } ))
+                menus.push( new tmp( { five , display , buttons , menu : this } ));
             }
             menus = menus.sort( ( a , b ) => {
                 return b.priority - a.priority;
@@ -76,14 +84,17 @@ module.exports = function( params ){
         } 
         eval("center");
     });
-    let unselectMenu = () => {
+    this.unselectMenu = () => {
         atMenu = true;
         menus[currentPosition].unselect();
         drawMenu();
     }
+    this.return = function(){
+        this.unselectMenu();
+    }
     leftArrow.on("down" , () => {
         if( atMenu === false ){
-            unselectMenu();
+            this.unselectMenu();
         }
         eval("left");
     });

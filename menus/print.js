@@ -1,5 +1,6 @@
 const http = require("http");
 const config = require("../config");
+const DisplayList = require("../display-list");
 let getJSON = (url , cb ) => {
 	http.get(url, function(res){
 	    var body = '';
@@ -19,14 +20,42 @@ let getJSON = (url , cb ) => {
 module.exports = function(params){
     let five = params.five;
     let display = params.display;
+    let menu = params.menu;
+
     this.displayName = "Print";
     this.priority = 2;
+    this.enabled = false;
+    const displayList = new DisplayList({
+        display,
+        list : [],
+        renderLine : (item) => {
+            return item.name;
+        },
+        select : ( item ) => {
+            console.log( item );
+            menu.return();
+        }
+
+    })
     this.select = function(){ 
-        display.write( 0 , 0 , 20 , "Print Menu");
+        this.enabled = true;
+        displayList.updateList([
+            {"name" : "TEST 1"},
+            {"name" : "TEST 2 "},
+            {"name" : "TEST 3"},
+            {"name" : "TEST 4 "},
+            {"name" : "TEST 5"}
+        ]);
+        displayList.display();
     }
-    this.unselect = function(){}
+    this.unselect = function(){
+        this.enabled = false;
+        displayList.active = false;
+    }
     this.eval = function( cmd ){
-        display.write(3 , 0 , 20 , cmd );
+        if( this.enabled === true ){
+            display.write(3 , 0 , 20 , cmd );
+        }
     }
 
 }
