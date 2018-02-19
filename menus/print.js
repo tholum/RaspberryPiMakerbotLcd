@@ -36,6 +36,7 @@ module.exports = function(params){
         },
         select : ( item ) => {
             console.log( item );
+            console.log( menu );
             menu.return();
         }
 
