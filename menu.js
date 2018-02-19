@@ -3,28 +3,10 @@ const DisplayList = require("./display-list");
 module.exports = function( params ){
     let five = params.five;
     let display = params.display;
+    let buttons = params.buttons;
     let self = this;
 
-    let rightArrow = new five.Button( { pin : "P1-35" , isPullup : true } );
-    //rightArrow.on("down" , () => { console.log("rightArrow P1-35")});
-
-	let downArrow = new five.Button( { pin : "P1-36" , isPullup : true } );
-	//downArrow.on("down" , () => { console.log("downArrow P1-36")});
-
-	let leftArrow = new five.Button( { pin : "P1-37" , isPullup : true } );
-	//leftArrow.on("down" , () => { console.log("leftArrow P1-37")});
-
-	let upArrow = new five.Button( { pin : "P1-38" , isPullup : true } );
-	//upArrow.on("down" , () => { console.log("upArrow P1-38")});
-
-    let centerButton = new five.Button( { pin : "P1-40" , isPullup : true } );
-    let buttons = {
-        rightArrow,
-        leftArrow,
-        downArrow,
-        upArrow,
-        centerButton
-    };
+    
 
     //centerButton.on("down" , () => { console.log("centerButton P1-40")});
 
@@ -69,7 +51,11 @@ module.exports = function( params ){
             drawMenu();
         });
     }
-    let eval = ( str ) => {
+    this.onList = [];
+    this.on = function( cmd , callback ){
+        this.onList.push( { cmd , callback });
+    }
+    this.eval = function( str ){
         if( atMenu === true ){
             displayList.eval( str );
         }
@@ -79,12 +65,14 @@ module.exports = function( params ){
                 currentItem.eval( str );
             });
         }
+        let callbacks = this.onList.filter( ( item) => {return item.cmd === str; });
+        for( item of callbacks ){
+            item.callback();
+        }
     }
     readMenus();
 
-    centerButton.on("down" , () => {
-        eval("center");
-    });
+    
     this.unselectMenu = () => {
         atMenu = true;
         currentItem.unselect();
@@ -100,22 +88,27 @@ module.exports = function( params ){
         }
         return true;
     }
-
-    leftArrow.on("down" , () => {
+    this.on("left" , () => {
         if( atMenu === false && canGoBack() === true ){
             this.unselectMenu();
         }
-        eval("left");
+    });
+    buttons.centerButton.on("down" , () => {
+        this.eval("center");
+    });
+    buttons.leftArrow.on("down" , () => {
+        
+        this.eval("left");
     });
 
-    downArrow.on("down" , () => {
-        eval("down");
+    buttons.downArrow.on("down" , () => {
+        this.eval("down");
     });
-    upArrow.on("down" , () => {
-        eval("up");
+    buttons.upArrow.on("down" , () => {
+        this.eval("up");
     });
-    rightArrow.on("right" , () =>{
-        eval("right");
+    buttons.rightArrow.on("right" , () =>{
+        this.eval("right");
     });
     
 }
