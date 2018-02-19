@@ -42,7 +42,7 @@ module.exports = function( params ){
             atMenu = false;
             currentItem = item;
             display.clear();
-            menus[currentPosition].select();
+            currentItem.select();
         }
     });    
     let drawMenu = () => {
