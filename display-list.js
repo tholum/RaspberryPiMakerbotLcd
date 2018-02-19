@@ -48,7 +48,7 @@ module.exports = function( params ){
     buttons.downArrow.on("down" , () => {
         if( this.active ){
             //selectedItem is 0 indexed items.length is 1
-            if( (selectedItem +1 ) < items.length ){
+            if( (selectedItem +1 ) < list.length ){
                 selectedItem++;
                 if( displayTop + 3 < selectedItem ){
                     displayTop++;
