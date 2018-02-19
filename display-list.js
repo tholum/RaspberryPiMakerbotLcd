@@ -34,26 +34,25 @@ module.exports = function( params ){
         selectedItem = 0;
         displayTop = 0;
     }
-    buttons.upArrow.on("down" , () => {
-        if( this.active ){
-            //selectedItem is 0 indexed items.length is 1
-            if( selectedItem !== 0 ){
-                selectedItem--;
-                if( displayTop  > selectedItem ){
-                    displayTop = selectedItem;
+    this.eval = function(cmd){
+        console.log( `display list ${cmd}`);
+        switch( cmd ){
+            case "up":
+                if( selectedItem !== 0 ){
+                    selectedItem--;
+                    if( displayTop  > selectedItem ){
+                        displayTop = selectedItem;
+                    }
                 }
-            }
-        }
-    });
-    buttons.downArrow.on("down" , () => {
-        if( this.active ){
-            //selectedItem is 0 indexed items.length is 1
-            if( (selectedItem +1 ) < list.length ){
-                selectedItem++;
-                if( displayTop + 3 < selectedItem ){
-                    displayTop++;
+            break;
+            case "down":
+                if( (selectedItem +1 ) < list.length ){
+                    selectedItem++;
+                    if( displayTop + 3 < selectedItem ){
+                        displayTop++;
+                    }
                 }
-            }
+            break;
         }
-    });
+    }
 }

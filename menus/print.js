@@ -56,6 +56,7 @@ module.exports = function(params){
     }
     this.eval = function( cmd ){
         if( this.enabled === true ){
+            displayList.eval(cmd);
         }
     }
 
