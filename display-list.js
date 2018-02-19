@@ -21,7 +21,7 @@ module.exports = function( params ){
     }
     this.display = function(){
         this.active = true;
-        let subItems = menus.slice( displayTop , displayTop + 4 );
+        let subItems = list.slice( displayTop , displayTop + 4 );
         let i = 0;
         for( item of subItems ){
             let icon = list.indexOf( item ) === selectedItem ? "* " : "  ";
