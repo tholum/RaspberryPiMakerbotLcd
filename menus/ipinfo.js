@@ -16,7 +16,7 @@ module.exports = function(params){
                     return;
                 }
                 if( i <= 3 ) {
-                    display.write( i , 0 , 20 `${ifname}: ${iface.address}`);
+                    display.write( i , 0 , 20 , `${ifname}: ${iface.address}`);
                 }
                 i++;
             });
