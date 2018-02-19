@@ -21,7 +21,6 @@ module.exports = function(params){
     let five = params.five;
     let display = params.display;
     let menu = params.menu;
-    console.log( menu );
     let buttons = params.buttons;
 
     this.displayName = "Print";
