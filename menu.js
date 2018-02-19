@@ -48,17 +48,6 @@ module.exports = function( params ){
     let drawMenu = () => {
         displayList.updateList( menus );
         displayList.display();
-        /*let start = 0;
-        let end = 4;
-        if( currentPosition > 4 ){
-            start = currentPosition - 4;
-            end = currentPosition;
-        }
-        let displayMenus = menus.slice( start , end );
-        for( let dmIndex in displayMenus ){
-            let icon = menus.indexOf( displayMenus[dmIndex]) === currentPosition ? '*' : ' ';
-            display.write( dmIndex , 0 , 20 , `${icon} ${displayMenus[dmIndex].displayName}` );
-        } */
     }
     let readMenus = () => {
         fs.readdir("./menus", function(err, items) {
@@ -75,7 +64,7 @@ module.exports = function( params ){
                 menus.push( new tmp( { five , display , buttons , menu : self } ));
             }
             menus = menus.sort( ( a , b ) => {
-                return b.priority - a.priority;
+                return a.priority - b.priority;
             });
             drawMenu();
         });
