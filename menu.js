@@ -94,8 +94,15 @@ module.exports = function( params ){
     this.return = function(){
         this.unselectMenu();
     }
+    canGoBack = () => {
+        if( currentItem !== false && currentItem.hasOwnProperty("disableBack") ){
+            return !currentItem.disableBack;
+        }
+        return true;
+    }
+
     leftArrow.on("down" , () => {
-        if( atMenu === false ){
+        if( atMenu === false && canGoBack() === true ){
             this.unselectMenu();
         }
         eval("left");
