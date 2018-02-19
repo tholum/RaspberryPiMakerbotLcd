@@ -21,6 +21,10 @@ module.exports = function( params ){
             display.write( i , 0 , 20 , `${icon}${renderLine(item)}`);
             i++;
         }
+        while( i < 3 ){
+            display.write( i , 0 , 20 , `  `);
+            i++;
+        }
     }
     this.updateList = function(newList){
         list = newList;
