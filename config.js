@@ -4,6 +4,7 @@ let latch = "P1-15";
 
 module.exports = {
     "apikey" : "994084602B3541E7A658BED294299B60",
+    "octoprintUrl" : "http://localhost",
     "lcd" : {
         "mode" : "ShiftLCD",
         "shiftRegisterPins" : {

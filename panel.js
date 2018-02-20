@@ -32,7 +32,7 @@ board.on("ready", function() {
 	};
 	const led = new five.Led(config.ledPin);
 	const display = new Display( { five , buttons });
-	const menu = new Menu( { display , buttons });
+	const menu = new Menu( { display  });
 
 	buttons.centerButton.on("down" , () => { menu.eval("center"); });
 	buttons.leftArrow.on("down" , () => { menu.eval("left");});

@@ -5,7 +5,7 @@ const DisplayList = require("../display-list");
 let printFile = ( path , object ,cb = () => {} ) => {
 
     request.post(
-        `http://localhost/${path}?apikey=${config.apikey}`,
+        `${config.octoprintUrl}/${path}?apikey=${config.apikey}`,
         { json: object },
         function (error, response, body) {
             console.log( response );
@@ -54,7 +54,7 @@ module.exports = function(params){
 
     })
     this.select = function(){ 
-        getJSON(`http://localhost/api/files?apikey=${config.apikey}&recursive=true`, ( data ) => {
+        getJSON(`${config.octoprintUrl}/api/files?apikey=${config.apikey}&recursive=true`, ( data ) => {
             let files = data.files.sort( ( a, b ) => { return b.date - a.date;} );
             displayList.updateList( files );
             displayList.display();
