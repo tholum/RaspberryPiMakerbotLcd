@@ -83,7 +83,7 @@ module.exports = function( params ){
     this.on("left" , () => {
         if( atMenu === false && canGoBack() === true ){
             this.unselectMenu();
-        }
+        } 
     });
     
     

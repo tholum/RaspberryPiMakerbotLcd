@@ -32,19 +32,28 @@ module.exports = function(params){
     let display = params.display;
     let menu = params.menu;
     let buttons = params.buttons;
-
+    let files = [];
     this.displayName = "Print";
     this.priority = 2;
     this.enabled = false;
+    this.disableBack = true;
+    let lists = [];
+
     const displayList = new DisplayList({
         buttons,
         display,
         list : [],
         renderLine : (item) => {
-            return item.display;
+            return ( item.type === "folder" ? '>' : "" ) + item.display;
         },
         select : ( item ) => {
-            console.log( item );
+            
+            if( item.type === "folder" ){
+                lists.push( item.children );
+                displayList.updateList( item.children );
+                displayList.display();
+                return;
+            }
             printFile(`/api/files/local/${item.path}` , {
                 "command": "select",
                 "print": true
@@ -55,7 +64,8 @@ module.exports = function(params){
     })
     this.select = function(){ 
         getJSON(`${config.octoprintUrl}/api/files?apikey=${config.apikey}&recursive=true`, ( data ) => {
-            let files = data.files.sort( ( a, b ) => { return b.date - a.date;} );
+            files = data.files.sort( ( a, b ) => { return b.date - a.date;} );
+            lists.push( files );
             displayList.updateList( files );
             displayList.display();
         });
@@ -71,6 +81,16 @@ module.exports = function(params){
     this.eval = function( cmd ){
         if( this.enabled === true ){
             displayList.eval(cmd);
+        }
+        if( cmd === "left" ){
+            if( lists.length <= 1 ){
+                menu.unselectMenu();
+            } else {
+                lists.pop();
+                displayList.updateList( lists[ lists.length -1 ] );
+                displayList.display();
+            }
+
         }
     }
 
